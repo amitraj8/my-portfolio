@@ -9,18 +9,18 @@ import {
   Brain, 
   Terminal,
   ChevronDown,
+  ChevronUp,     // Added for the accordion interaction
   Menu,
   X,
   Eye,
   FileText,
   MessageCircle, // For WhatsApp
   Send,          // For Telegram
-  User,
-  MapPin,
-  Phone
+  User
 } from 'lucide-react';
 
 // --- SAFE PUBLIC URL HANDLING ---
+// This prevents errors if process.env isn't fully loaded in some environments
 const getPublicUrl = () => {
   try {
     return process.env.PUBLIC_URL || "";
@@ -117,9 +117,45 @@ const portfolioData = {
     }
   ],
   volunteering: [
-    "Moscow International Book Fair (Coordinator)",
-    "Bharat Utsav - Festival of India (Event Manager)",
-    "BRICS+ Blind Football Tournament (Volunteer)"
+    {
+      title: "Moscow International Book Fair",
+      role: "Coordinator",
+      date: "Sep 2025",
+      link: "https://mibf.info/",
+      desc: [
+        "Served as part of the management and coordination team at the Indian Pavilion.",
+        "Organised and managed events featuring Indian publishers and authors, ensuring smooth execution.",
+        "Acted as a liaison between Indian and international publishers, authors, and visitors.",
+        "Welcomed and guided international guests and visitors through the Indian Pavilion.",
+        "Assisted in coordinating schedules, meetings, and cultural programs."
+      ]
+    },
+    {
+      title: "Bharat Utsav - Festival of India",
+      role: "Event Manager",
+      date: "July 2025",
+      link: "https://www.mos.ru/en/news/item/155858073/",
+      desc: [
+        "Collaborated with the Embassy of India in Moscow to organise and manage a nine-day cultural celebration.",
+        "Overseeing planning, coordination, and on-site execution of multiple cultural programs.",
+        "Organised and supervised diverse events, including yoga sessions, dance performances, and plays.",
+        "Coordinated with artists, embassy officials, and local partners to ensure smooth logistics.",
+        "Managed guest engagement and promoted cross-cultural understanding."
+      ]
+    },
+    {
+      title: "BRICS+ Blind Football Tournament",
+      role: "Volunteer",
+      date: "Dec 2024",
+      link: "https://brics-russia2024.ru/en/news/v-moskve-proydet-pervyy-mezhdunarodnyy-turnir-briks-po-nezryachemu-futbolu/",
+      desc: [
+        "Assisted in tournament organization, helping with setup, scheduling, and on-ground coordination.",
+        "Provided logistical support to participating teams (equipment management, guiding players).",
+        "Served as a match-day volunteer, addressing real-time needs of players and officials.",
+        "Ensured accessibility standards were maintained for visually impaired athletes.",
+        "Collaborated with 20+ volunteers to create an inclusive sporting environment."
+      ]
+    }
   ]
 };
 
@@ -258,7 +294,13 @@ const Navbar = ({ activeSection }) => {
 // 3. Main App Component
 export default function App() {
   const [activeSection, setActiveSection] = useState('home');
+  const [activeVolunteer, setActiveVolunteer] = useState(null); // State for volunteering accordion
   const typedText = useTypewriter(portfolioData.personal.titles);
+
+  // Toggle function for accordion
+  const toggleVolunteer = (index) => {
+    setActiveVolunteer(activeVolunteer === index ? null : index);
+  };
 
   // ScrollSpy Logic
   useEffect(() => {
@@ -346,7 +388,7 @@ export default function App() {
               </div>
             </div>
             
-            {/* UPDATED: Static Square Photo */}
+            {/* UPDATED: Static Square Photo with object-top crop */}
             <div className="order-1 md:order-2 flex justify-center">
                <div className="relative group">
                  <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
@@ -354,7 +396,7 @@ export default function App() {
                     <img 
                       src={PUBLIC_URL + "/avatar.jpg"} 
                       alt="Amit Raj" 
-                      className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500" 
+                      className="w-full h-full object-cover object-top transform hover:scale-105 transition-transform duration-500" 
                     />
                  </div>
               </div>
@@ -432,16 +474,50 @@ export default function App() {
           {/* Volunteering Subset */}
           <div className="mb-16">
              <h2 className="text-2xl font-bold mb-8">Community & <span className="text-purple-500">Volunteering</span></h2>
-             <div className="flex flex-wrap justify-center gap-4">
+             
+             {/* Updated Accordion Style List */}
+             <div className="max-w-3xl mx-auto space-y-4">
                 {portfolioData.volunteering.map((vol, idx) => (
-                  <span key={idx} className="px-4 py-2 bg-slate-800 rounded-full text-gray-300 text-sm border border-slate-700">
-                    {vol}
-                  </span>
+                  <div key={idx} className="bg-slate-900 rounded-lg border border-slate-800 overflow-hidden transition-all duration-300 hover:border-purple-500/50">
+                    <button
+                      onClick={() => toggleVolunteer(idx)}
+                      className="w-full px-6 py-4 flex items-center justify-between text-left focus:outline-none bg-slate-900 hover:bg-slate-800/50 transition-colors"
+                    >
+                      <div>
+                        <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                          {vol.title}
+                        </h3>
+                        <p className="text-purple-400 text-sm font-medium">{vol.role}</p>
+                      </div>
+                      <div className="flex items-center gap-3">
+                         <span className="text-gray-500 text-sm hidden sm:block">{vol.date}</span>
+                         {activeVolunteer === idx ? <ChevronUp size={20} className="text-purple-500" /> : <ChevronDown size={20} className="text-gray-400" />}
+                      </div>
+                    </button>
+                    
+                    {/* Expandable Content */}
+                    <div 
+                      className={`px-6 transition-all duration-300 ease-in-out overflow-hidden ${
+                        activeVolunteer === idx ? 'max-h-[500px] opacity-100 pb-6' : 'max-h-0 opacity-0'
+                      }`}
+                    >
+                      <ul className="list-disc list-inside space-y-2 text-gray-300 mb-4 text-left border-t border-slate-800 pt-4">
+                        {vol.desc.map((item, i) => (
+                          <li key={i}>{item}</li>
+                        ))}
+                      </ul>
+                      <div className="text-left">
+                         <a href={vol.link} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm text-purple-400 hover:text-purple-300 font-medium">
+                           Visit Event Website <ExternalLink size={14} />
+                         </a>
+                      </div>
+                    </div>
+                  </div>
                 ))}
              </div>
           </div>
 
-          <div className="bg-gradient-to-r from-purple-900/50 to-blue-900/50 p-8 rounded-2xl border border-white/10">
+          <div className="bg-gradient-to-r from-purple-900/50 to-blue-900/50 p-8 rounded-2xl border border-white/10 mt-16">
             <h2 className="text-3xl font-bold mb-4">My Professional Documents</h2>
             <p className="text-gray-300 mb-8">
               Review my diverse journey from Finance to Data Science in detail.
