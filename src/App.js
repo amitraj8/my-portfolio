@@ -15,6 +15,17 @@ import {
   FileText
 } from 'lucide-react';
 
+// --- SAFE PUBLIC URL HANDLING ---
+// This prevents the "ReferenceError: process is not defined" in some preview environments
+const getPublicUrl = () => {
+  try {
+    return process.env.PUBLIC_URL || "";
+  } catch (e) {
+    return "";
+  }
+};
+const PUBLIC_URL = getPublicUrl();
+
 // --- DATA SECTION (Based on your CV) ---
 const portfolioData = {
   personal: {
@@ -329,12 +340,12 @@ export default function App() {
               </div>
             </div>
             
-            {/* UPDATED: Avatar Image */}
+            {/* UPDATED: Avatar Image with Safe Public URL */}
             <div className="order-1 md:order-2 flex justify-center">
               <div className="w-64 h-64 md:w-80 md:h-80 bg-gradient-to-tr from-purple-600 to-blue-500 rounded-full p-1 shadow-2xl animate-blob">
                  <div className="w-full h-full bg-slate-900 rounded-full flex items-center justify-center overflow-hidden">
                     <img 
-                      src="/avatar.jpg" 
+                      src={PUBLIC_URL + "/avatar.jpg"} 
                       alt="Amit Raj" 
                       className="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity" 
                     />
@@ -423,7 +434,7 @@ export default function App() {
              </div>
           </div>
 
-          {/* UPDATED: Resume Buttons */}
+          {/* UPDATED: Resume Buttons with Safe Public URL */}
           <div className="bg-gradient-to-r from-purple-900/50 to-blue-900/50 p-8 rounded-2xl border border-white/10">
             <h2 className="text-3xl font-bold mb-4">My Professional Documents</h2>
             <p className="text-gray-300 mb-8">
@@ -433,7 +444,7 @@ export default function App() {
             <div className="flex flex-col sm:flex-row justify-center gap-6">
               {/* Button 1: View Resume (Opens in New Tab) */}
               <a 
-                href="/resume.pdf" 
+                href={PUBLIC_URL + "/resume.pdf"} 
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-bold shadow-lg shadow-purple-500/30 transition-all transform hover:-translate-y-1"
@@ -443,7 +454,7 @@ export default function App() {
 
               {/* Button 2: View CV (Opens in New Tab) */}
               <a 
-                href="/cv.pdf" 
+                href={PUBLIC_URL + "/cv.pdf"} 
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-slate-700 hover:bg-slate-600 text-white rounded-lg font-bold shadow-lg transition-all transform hover:-translate-y-1 border border-slate-600"
