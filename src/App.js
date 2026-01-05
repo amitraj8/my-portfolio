@@ -12,11 +12,15 @@ import {
   Menu,
   X,
   Eye,
-  FileText
+  FileText,
+  MessageCircle, // For WhatsApp
+  Send,          // For Telegram
+  User,
+  MapPin,
+  Phone
 } from 'lucide-react';
 
 // --- SAFE PUBLIC URL HANDLING ---
-// This prevents the "ReferenceError: process is not defined" in some preview environments
 const getPublicUrl = () => {
   try {
     return process.env.PUBLIC_URL || "";
@@ -26,7 +30,7 @@ const getPublicUrl = () => {
 };
 const PUBLIC_URL = getPublicUrl();
 
-// --- DATA SECTION (Based on your CV) ---
+// --- DATA SECTION ---
 const portfolioData = {
   personal: {
     name: "Amit Raj",
@@ -35,7 +39,9 @@ const portfolioData = {
     email: "amit83908@gmail.com",
     github: "https://github.com/amitraj8",
     linkedin: "https://www.linkedin.com/in/amit-raj-379045130/",
-    location: "Moscow, Russia"
+    location: "Moscow, Russia",
+    whatsapp: "https://wa.me/79966746728",
+    telegram: "https://t.me/hseamit"
   },
   experience: [
     {
@@ -179,6 +185,7 @@ const Navbar = ({ activeSection }) => {
     { name: "Experience", id: "experience" },
     { name: "Projects", id: "projects" },
     { name: "Resume", id: "resume" },
+    { name: "Contact", id: "contact" }, // Added Contact Link
   ];
 
   return (
@@ -256,7 +263,7 @@ export default function App() {
   // ScrollSpy Logic
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'about', 'experience', 'projects', 'resume'];
+      const sections = ['home', 'about', 'experience', 'projects', 'resume', 'contact'];
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
@@ -277,7 +284,6 @@ export default function App() {
 
       {/* HERO SECTION */}
       <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-16">
-        {/* Background Particles/Gradients */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 opacity-20">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
@@ -340,14 +346,15 @@ export default function App() {
               </div>
             </div>
             
-            {/* UPDATED: Avatar Image with Safe Public URL */}
+            {/* UPDATED: Static Square Photo */}
             <div className="order-1 md:order-2 flex justify-center">
-              <div className="w-64 h-64 md:w-80 md:h-80 bg-gradient-to-tr from-purple-600 to-blue-500 rounded-full p-1 shadow-2xl animate-blob">
-                 <div className="w-full h-full bg-slate-900 rounded-full flex items-center justify-center overflow-hidden">
+               <div className="relative group">
+                 <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+                 <div className="relative w-64 h-64 md:w-80 md:h-80 bg-slate-900 rounded-2xl ring-1 ring-gray-900/5 shadow-2xl overflow-hidden border-4 border-slate-800">
                     <img 
                       src={PUBLIC_URL + "/avatar.jpg"} 
                       alt="Amit Raj" 
-                      className="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity" 
+                      className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500" 
                     />
                  </div>
               </div>
@@ -434,7 +441,6 @@ export default function App() {
              </div>
           </div>
 
-          {/* UPDATED: Resume Buttons with Safe Public URL */}
           <div className="bg-gradient-to-r from-purple-900/50 to-blue-900/50 p-8 rounded-2xl border border-white/10">
             <h2 className="text-3xl font-bold mb-4">My Professional Documents</h2>
             <p className="text-gray-300 mb-8">
@@ -442,7 +448,6 @@ export default function App() {
             </p>
             
             <div className="flex flex-col sm:flex-row justify-center gap-6">
-              {/* Button 1: View Resume (Opens in New Tab) */}
               <a 
                 href={PUBLIC_URL + "/resume.pdf"} 
                 target="_blank"
@@ -452,7 +457,6 @@ export default function App() {
                 <FileText size={20} /> View My Resume
               </a>
 
-              {/* Button 2: View CV (Opens in New Tab) */}
               <a 
                 href={PUBLIC_URL + "/cv.pdf"} 
                 target="_blank"
@@ -461,6 +465,105 @@ export default function App() {
               >
                 <Eye size={20} /> View My CV
               </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* NEW CONTACT SECTION */}
+      <section id="contact" className="py-20 px-4 bg-slate-900/50">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">Contact <span className="text-purple-500">Me</span></h2>
+          
+          <div className="grid md:grid-cols-2 gap-12">
+            {/* Left Side: Contact Info */}
+            <div className="space-y-8">
+              <h3 className="text-2xl font-bold mb-6">Get in Touch</h3>
+              <p className="text-gray-400 mb-8 text-lg">
+                I am always open to discussing new projects, creative ideas or opportunities to be part of your visions.
+              </p>
+              
+              <div className="space-y-6">
+                 {/* WhatsApp */}
+                 <a href={portfolioData.personal.whatsapp} target="_blank" rel="noreferrer" className="flex items-center gap-4 text-gray-300 hover:text-green-400 transition-colors p-4 bg-slate-900 rounded-lg border border-slate-800 hover:border-green-500/50">
+                    <div className="p-3 bg-slate-800 rounded-full text-green-400">
+                      <MessageCircle size={24} />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-lg">WhatsApp</h4>
+                      <p className="text-sm text-gray-500">Chat with me</p>
+                    </div>
+                 </a>
+
+                 {/* Telegram */}
+                 <a href={portfolioData.personal.telegram} target="_blank" rel="noreferrer" className="flex items-center gap-4 text-gray-300 hover:text-blue-400 transition-colors p-4 bg-slate-900 rounded-lg border border-slate-800 hover:border-blue-500/50">
+                    <div className="p-3 bg-slate-800 rounded-full text-blue-400">
+                      <Send size={24} />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-lg">Telegram</h4>
+                      <p className="text-sm text-gray-500">Message me @hseamit</p>
+                    </div>
+                 </a>
+
+                 {/* Email */}
+                 <a href={`mailto:${portfolioData.personal.email}`} className="flex items-center gap-4 text-gray-300 hover:text-purple-400 transition-colors p-4 bg-slate-900 rounded-lg border border-slate-800 hover:border-purple-500/50">
+                    <div className="p-3 bg-slate-800 rounded-full text-purple-400">
+                      <Mail size={24} />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-lg">Email</h4>
+                      <p className="text-sm text-gray-500">{portfolioData.personal.email}</p>
+                    </div>
+                 </a>
+
+                 {/* Socials Row */}
+                 <div className="flex gap-4 pt-4">
+                    <a href={portfolioData.personal.github} target="_blank" rel="noreferrer" className="p-3 bg-slate-900 rounded-full hover:bg-purple-600 hover:text-white transition-colors border border-slate-800">
+                      <Github size={20} />
+                    </a>
+                    <a href={portfolioData.personal.linkedin} target="_blank" rel="noreferrer" className="p-3 bg-slate-900 rounded-full hover:bg-blue-600 hover:text-white transition-colors border border-slate-800">
+                      <Linkedin size={20} />
+                    </a>
+                 </div>
+              </div>
+            </div>
+
+            {/* Right Side: Contact Form */}
+            <div className="bg-slate-900 p-8 rounded-2xl border border-slate-800 shadow-xl">
+              <h3 className="text-2xl font-bold mb-6">Send Message</h3>
+              <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" className="space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-gray-400">Your Name</label>
+                    <div className="relative">
+                      <User className="absolute left-3 top-3 text-gray-500" size={18} />
+                      <input type="text" name="name" required className="w-full bg-slate-950 border border-slate-800 rounded-lg py-2.5 pl-10 pr-4 text-gray-200 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors" placeholder="John Doe" />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-gray-400">Your Email</label>
+                    <div className="relative">
+                      <Mail className="absolute left-3 top-3 text-gray-500" size={18} />
+                      <input type="email" name="email" required className="w-full bg-slate-950 border border-slate-800 rounded-lg py-2.5 pl-10 pr-4 text-gray-200 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors" placeholder="john@example.com" />
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-400">Subject</label>
+                  <input type="text" name="subject" required className="w-full bg-slate-950 border border-slate-800 rounded-lg py-2.5 px-4 text-gray-200 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors" placeholder="Project Inquiry" />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-400">Message</label>
+                  <textarea name="message" rows="4" required className="w-full bg-slate-950 border border-slate-800 rounded-lg py-2.5 px-4 text-gray-200 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors" placeholder="Write your message here..."></textarea>
+                </div>
+
+                <button type="submit" className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold py-3 rounded-lg shadow-lg transform transition-all hover:-translate-y-1">
+                  Send Message
+                </button>
+              </form>
             </div>
           </div>
         </div>
