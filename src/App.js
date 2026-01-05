@@ -11,7 +11,8 @@ import {
   ChevronDown,
   Menu,
   X,
-  Download
+  Eye,
+  FileText
 } from 'lucide-react';
 
 // --- DATA SECTION (Based on your CV) ---
@@ -327,11 +328,16 @@ export default function App() {
                 </div>
               </div>
             </div>
+            
+            {/* UPDATED: Avatar Image */}
             <div className="order-1 md:order-2 flex justify-center">
-              {/* Abstract avatar placeholder */}
               <div className="w-64 h-64 md:w-80 md:h-80 bg-gradient-to-tr from-purple-600 to-blue-500 rounded-full p-1 shadow-2xl animate-blob">
                  <div className="w-full h-full bg-slate-900 rounded-full flex items-center justify-center overflow-hidden">
-                    <img src="/api/placeholder/400/400" alt="Avatar" className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity" />
+                    <img 
+                      src="/avatar.jpg" 
+                      alt="Amit Raj" 
+                      className="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity" 
+                    />
                  </div>
               </div>
             </div>
@@ -417,18 +423,34 @@ export default function App() {
              </div>
           </div>
 
+          {/* UPDATED: Resume Buttons */}
           <div className="bg-gradient-to-r from-purple-900/50 to-blue-900/50 p-8 rounded-2xl border border-white/10">
-            <h2 className="text-3xl font-bold mb-4">Check out my Resume</h2>
+            <h2 className="text-3xl font-bold mb-4">My Professional Documents</h2>
             <p className="text-gray-300 mb-8">
               Review my diverse journey from Finance to Data Science in detail.
             </p>
-            <a 
-              href="/resume.pdf" // Make sure to put your PDF in the 'public' folder and name it resume.pdf
-              download="Amit_Raj_CV.pdf"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-bold shadow-lg shadow-purple-500/30 transition-all transform hover:-translate-y-1"
-            >
-              <Download size={20} /> Download CV
-            </a>
+            
+            <div className="flex flex-col sm:flex-row justify-center gap-6">
+              {/* Button 1: View Resume (Opens in New Tab) */}
+              <a 
+                href="/resume.pdf" 
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-bold shadow-lg shadow-purple-500/30 transition-all transform hover:-translate-y-1"
+              >
+                <FileText size={20} /> View My Resume
+              </a>
+
+              {/* Button 2: View CV (Opens in New Tab) */}
+              <a 
+                href="/cv.pdf" 
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-slate-700 hover:bg-slate-600 text-white rounded-lg font-bold shadow-lg transition-all transform hover:-translate-y-1 border border-slate-600"
+              >
+                <Eye size={20} /> View My CV
+              </a>
+            </div>
           </div>
         </div>
       </section>
