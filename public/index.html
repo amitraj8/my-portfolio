@@ -1,41 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="utf-8" />
-  <link rel="icon" href="%PUBLIC_URL%/favicon.png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#000000" />
-  <meta name="description" content="Web site created using create-react-app" />
-  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-  <title>S0umyajit | Portfolio</title>
-  <meta name="description" content="Self Developed personal website build with React.js">
-
-  <!-- Google / Search Engine Tags -->
-  <meta itemprop="name" content="S0umyajit | Portfolio">
-  <meta itemprop="description" content="Self Developed personal website build with React.js">
-  <meta itemprop="image"
-    content="https://raw.githubusercontent.com/soumyajit4419/Portfolio/master/Images/readme-img.png?token=AK7VCIF5RYEUZZAURELPTAC76U6AK">
-
-  <!-- Facebook Meta Tags -->
-  <meta property="og:url" content="https://soumyajit.vercel.app">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="S0umyajit | Portfolio">
-  <meta property="og:description" content="Self Developed personal website build with React.js">
-  <meta property="og:image"
-    content="https://raw.githubusercontent.com/soumyajit4419/Portfolio/master/Images/readme-img.png?token=AK7VCIF5RYEUZZAURELPTAC76U6AK">
-
-  <!-- Twitter Meta Tags -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="S0umyajit | Portfolio">
-  <meta name="twitter:description" content="Self Developed personal website build with React.js">
-  <meta name="twitter:image"
-    content="https://raw.githubusercontent.com/soumyajit4419/Portfolio/master/Images/readme-img.png?token=AK7VCIF5RYEUZZAURELPTAC76U6AK">
-</head>
-
-<body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root"></div>
-</body>
-
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Amit Raj | Portfolio</title>
+    <meta name="description" content="Portfolio of Amit Raj - Data Science Student & Researcher" />
+    
+    <!-- This loads the Tailwind Styles automatically -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fix for custom animations configuration -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            animation: {
+              blob: "blob 7s infinite",
+              wave: "wave 2.5s infinite",
+              blink: "blink 1s step-end infinite"
+            },
+            keyframes: {
+              blob: {
+                "0%": { transform: "translate(0px, 0px) scale(1)" },
+                "33%": { transform: "translate(30px, -50px) scale(1.1)" },
+                "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
+                "100%": { transform: "translate(0px, 0px) scale(1)" }
+              },
+              wave: {
+                "0%": { transform: "rotate(0.0deg)" },
+                "10%": { transform: "rotate(14.0deg)" },
+                "20%": { transform: "rotate(-8.0deg)" },
+                "30%": { transform: "rotate(14.0deg)" },
+                "40%": { transform: "rotate(-4.0deg)" },
+                "50%": { transform: "rotate(10.0deg)" },
+                "60%": { transform: "rotate(0.0deg)" },
+                "100%": { transform: "rotate(0.0deg)" }
+              },
+              blink: {
+                "0%, 100%": { opacity: "1" },
+                "50%": { opacity: "0" }
+              }
+            }
+          }
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+  </body>
 </html>
