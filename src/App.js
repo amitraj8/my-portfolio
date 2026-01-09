@@ -538,7 +538,7 @@ export default function App() {
                 href={PUBLIC_URL + "/cv.pdf"} 
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-slate-700 hover:bg-purple-600 text-white rounded-lg font-bold shadow-lg transition-all transform hover:-translate-y-1 border border-slate-600"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-purple-700 hover:bg-purple-600 text-white rounded-lg font-bold shadow-lg transition-all transform hover:-translate-y-1 border border-slate-600"
               >
                 <Eye size={20} /> View My CV
               </a>
