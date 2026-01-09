@@ -34,8 +34,8 @@ const PUBLIC_URL = getPublicUrl();
 const portfolioData = {
   personal: {
     name: "Amit Raj",
-    titles: ["Data Science Student", "AI Researcher", "Python Developer", "Financial Analyst"],
-    about: "I am a Master's student in Data Science at HSE University, Moscow, with a unique background spanning Management, Finance, and Technology. Currently working as a Research Intern at the Laboratory of Artificial Intelligence Methods for Cognitive Sciences, I focus on using Machine Learning to understand human behavior.",
+    titles: ["Data Science Expert", "AI/ML Researcher", "Python Developer", "NLP Expert", "Network Science Expert"],
+    about: "I am a Master's student in Data Science at HSE University, Moscow, with a strong interest in Artificial Intelligence and Machine Learning. Currently working as a Research Intern at the Laboratory of Artificial Intelligence Methods for Cognitive Sciences, I focus on using Machine Learning to understand human behavior.",
     email: "amit83908@gmail.com",
     github: "https://github.com/amitraj8",
     linkedin: "https://www.linkedin.com/in/amit-raj-379045130/",
@@ -62,6 +62,7 @@ const portfolioData = {
       location: "Gurugram, India",
       desc: [
         "Analyzed and processed medical claims ensuring 100% accuracy with U.S. healthcare regulations.",
+        " Investigated and resolved billing discrepancies between healthcare providers and insurers",
         "Collaborated with cross-functional teams to optimize revenue cycle management."
       ]
     },
@@ -92,9 +93,9 @@ const portfolioData = {
   ],
   projects: [
     {
-      title: "Tabular Data Chatbot",
+      title: "Question Answering over Tabular Data",
       tech: "Python, NLP, Web Dev",
-      desc: "A restaurant-specific chatbot capable of answering queries about menus and reservations using structured tabular data.",
+      desc: "Ani is a restaurant-specific virtual assistant capable of answering queries about menus and reservations using structured tabular data.",
       link: "https://github.com/amitraj8/restaurant-chatbot"
     },
     {
@@ -369,7 +370,7 @@ export default function App() {
               </p>
               <p className="text-lg text-gray-300 leading-relaxed mb-8">
                 My journey spans from <span className="text-purple-400">Finance & Management</span> to the cutting edge of <span className="text-purple-400">Data Science</span>. 
-                I love building new things and am fluent in classics like <i className="text-purple-400">Python, SQL, and Machine Learning.</i>
+                I love building practical solutions and I'm fluent in classics like <i className="text-purple-400">Python, SQL, and Machine Learning.</i>
               </p>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -537,7 +538,7 @@ export default function App() {
                 href={PUBLIC_URL + "/cv.pdf"} 
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-slate-700 hover:bg-slate-600 text-white rounded-lg font-bold shadow-lg transition-all transform hover:-translate-y-1 border border-slate-600"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-slate-700 hover:bg-purple-600 text-white rounded-lg font-bold shadow-lg transition-all transform hover:-translate-y-1 border border-slate-600"
               >
                 <Eye size={20} /> View My CV
               </a>
