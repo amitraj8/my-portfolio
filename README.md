@@ -46,6 +46,6 @@ I am always open to discussing new projects, creative ideas, or opportunities to
 </a>
 &nbsp;
 <a href="https://www.linkedin.com/in/amit-raj-379045130/" target="_blank">
-<img src="https://www.google.com/search?q=https://img.shields.io/badge/LinkedIn-Connect-0077B5%3Fstyle%3Dfor-the-badge%26logo%3Dlinkedin%26logoColor%3Dwhite" alt="LinkedIn" />
+<img src="https://img.shields.io/badge/-LinkedIn-blue?style=flat-square&logo=Linkedin&logoColor=white&link=YOUR_LINKEDIN_URL" alt="LinkedIn" />
 </a>
 </p>
